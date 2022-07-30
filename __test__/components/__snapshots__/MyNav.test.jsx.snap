@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on component MyNav Should match with the snapshost 1`] = `
+<div>
+  <nav
+    class="navbar navbar-expand navbar-dark bg-dark"
+  >
+    <div
+      class="container"
+    >
+      <a
+        class="navbar-brand"
+        href="#home"
+      >
+        <img
+          alt=""
+          class="d-inline-block align-top"
+          height="30"
+          src="../../src/favicon.svg"
+          width="30"
+        />
+          
+        REACT CHALLENGE - TBX
+      </a>
+    </div>
+  </nav>
+</div>
+`;

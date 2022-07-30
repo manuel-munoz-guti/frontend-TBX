@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test On component FileRow Should match with snapshot 1`] = `
+<div>
+  <table
+    class="table"
+  >
+    <tbody>
+      <tr>
+        <td>
+           
+          test1.csv
+           
+        </td>
+        <td>
+           
+          UFNWbIeTSjoySbvQBMbLqp
+           
+        </td>
+        <td>
+           
+          87
+           
+        </td>
+        <td>
+           
+          7ac6f24ef988372576935d449d02176f
+           
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
