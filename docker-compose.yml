@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
+    environment:
+      NODE_ENV: pro
+  
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    ports:
+      - "8005:80"
+    volumes:
+      - .:/test
+    environment:
+      NODE_ENV: test
