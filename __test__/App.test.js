@@ -1,53 +1,38 @@
-const { renderHook, render, screen } = require("@testing-library/react");
-const { FilesTable } = require("../src/components/FilesTable");
-const { useLoadFiles } = require("../src/hooks/useLoadFiles");
-const { LoadingFiles } = require("../src/ui/components/LoadingFiles");
-const { demoData } = require("./fixtures/fielsFixtures");
+const { renderHook, render } = require("@testing-library/react");
 import App from '../src/App';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { setClearResponse } from '../src/store/files';
+import { setNotLoading } from '../src/store/ui/uiSlice';
 
 jest.mock('../src/hooks/useLoadFiles.js');
 
 describe('Test on React App Component', () => {
 
     const initialValues = {
-        loading: true,
-        data: []
+        ui: {
+            isTyping: false,
+            isLoading: true,
+        }
     }
 
-    const finalValues = {
-        loading: false,
-        data: demoData
-    }
-    
-    test('Should return the progress Bar initially', () => {
+    const mockStore = configureStore();
+    let store;
 
-        useLoadFiles.mockReturnValue(initialValues);
-
-        const { result } = renderHook( () => useLoadFiles() );
-        const { loading, data } = result.current;
-        
-        render(<App />);
-
-        expect( screen.getByText('Loading(0%)...') );
-
+    test('Should get the initial values from store', () => {
+        store = mockStore(initialValues);
+        expect(store.getState()).toEqual(initialValues);
     });
 
-    test('Should retrun the table of files after fetching the data from API', () => {
-
-        // useLoadFiles.mockReturnValue(finalValues);
-    
-        // const { result } = renderHook( () => useLoadFiles(finalValues) );
-        // const { loading, data } = result.current;
-
-        // console.log(loading, data);
-
-      
-        //     const { debug } = render(<App />);
-    
-         
-        // debug();
-        // // console.log(screen.getAllByText(' ') );
-        // screen.debug();
-        // expect( screen.getByText('File Name') );
+    test('Should get the initial values from store', () => {
+        store = mockStore(initialValues); 
+        
+        // Dispatch the action
+        store.dispatch(setNotLoading());
+        
+        // Test if your store dispatched the expected actions
+        const actions = store.getActions();
+        const expectedPayload = { "payload": undefined, "type": "ui/setNotLoading" };
+        expect(actions).toEqual([ expectedPayload ]);
     });
 });

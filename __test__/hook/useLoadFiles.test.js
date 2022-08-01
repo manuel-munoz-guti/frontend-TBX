@@ -1,6 +1,5 @@
 const { render, renderHook } = require("@testing-library/react");
 const { useLoadFiles } = require("../../src/hooks/useLoadFiles");
-import App from '../../src/App';
 import { demoData } from '../fixtures/fielsFixtures';
 
 jest.mock('../../src/hooks/useLoadFiles.js');
@@ -8,13 +7,25 @@ jest.mock('../../src/hooks/useLoadFiles.js');
 describe('Test on Custom Hook Load Files', () => {
     
     const initialValues = {
-        loading: true,
-        data: []
+        response: {
+            ok: false,
+            status: 0,
+            code: '',
+            message: ''
+        },
+        data: [],
+        active: null
     }
 
     const finalValues = {
-        loading: false,
-        data: demoData
+        response: {
+            ok: true,
+            status: 200,
+            code: 'OK',
+            message: 'OK'
+        },
+        data: demoData,
+        active: null
     }
 
     test('Should return the default values', () => {
@@ -22,8 +33,8 @@ describe('Test on Custom Hook Load Files', () => {
         useLoadFiles.mockReturnValue(initialValues);
 
         const { result } = renderHook( () => useLoadFiles() );
-        const { loading, data } = result.current;
-        expect(loading).toBe(true);
+        const { response , data } = result.current;
+        expect(response.ok).toBe(false);
         expect(data).toEqual([]);
     });
 
@@ -32,8 +43,8 @@ describe('Test on Custom Hook Load Files', () => {
         useLoadFiles.mockReturnValue(finalValues);
 
         const { result } = renderHook( () => useLoadFiles() );
-        const { loading, data } = result.current;
-        expect(loading).toBe(false);
+        const { response, data } = result.current;
+        expect(response.ok).toBe(true);
         expect(data).toEqual(demoData);
 
     });

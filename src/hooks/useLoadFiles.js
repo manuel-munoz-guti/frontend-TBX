@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLoadingFiles } from "../store/files/thunks";
 
 export const useLoadFiles = () => {
-    const { loading, data } = useSelector( state => state.files );
+    const { response } = useSelector( state => state.files );
+    const { isLoading, isTyping } = useSelector( state => state.ui );
     const dispatch = useDispatch();
 
     useEffect(() => {
       
-        dispatch( startLoadingFiles() );
+        dispatch(startLoadingFiles());
         
     }, [])
     
 
     return {
-        loading, 
-        data
+      isLoading,
+      isTyping,
+      response
     }
 }

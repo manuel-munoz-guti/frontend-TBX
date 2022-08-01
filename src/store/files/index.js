@@ -1,3 +1,3 @@
 
-export *  from './fileSlice';
+export *  from './filesSlice';
 export * from './thunks';

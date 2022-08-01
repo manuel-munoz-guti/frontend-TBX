@@ -1,5 +1,4 @@
-const { fecthFilesList } = require("../../../src/api/files");
-const { startLoadingFiles } = require("../../../src/store/files/thunks");
+const { startLoadingFiles, startLodingFile } = require("../../../src/store/files/thunks");
 
 describe('Test on thunks function of Redux', () => {
 
@@ -10,6 +9,13 @@ describe('Test on thunks function of Redux', () => {
     test('should startLoadingFiles thunk to have been called', async() => {
 
         await startLoadingFiles() (dispatch);
+        expect(dispatch).toHaveBeenCalled();
+
+    });
+
+    test('should startLoadingFiles thunk to have been called', async() => {
+
+        await startLodingFile() (dispatch);
         expect(dispatch).toHaveBeenCalled();
 
     });

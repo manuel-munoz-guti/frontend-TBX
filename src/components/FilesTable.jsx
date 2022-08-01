@@ -6,7 +6,7 @@ import { FileHeader } from './FileHeader';
 
 export const FilesTable = () => {
   const [header, setHeader] = useState(['File Name', 'Text', 'Number', 'Hex']);   // header's columns for table
-  const { data } = useSelector( state => state.files );
+  const { data, active } = useSelector( state => state.files );
 
   return (
     <div className='animate__animated animate__backInUp'>
@@ -14,7 +14,9 @@ export const FilesTable = () => {
         
         <FileHeader columns={header} />
         
-        <FileBody data={data}/>
+        {
+          (!active) ? <FileBody data={data}/> : <FileBody data={active}/>
+        }
       
       </Table>
     </div>
